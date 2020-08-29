@@ -20,4 +20,8 @@ public class QNAService {
     public List<QNAModel> get10QNAs(int start) {
         return qnaDao.get10QNAs(start);
     }
+
+    public void addQuestion(QNAModel question) {
+        qnaDao.addQuestion(question);
+    }
 }

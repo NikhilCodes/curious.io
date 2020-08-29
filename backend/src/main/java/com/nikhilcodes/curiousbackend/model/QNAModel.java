@@ -8,18 +8,18 @@ import java.util.Optional;
 
 public class QNAModel {
     final private String question;
-    final private long id;
+    final private int id;
     final private ArrayList<AnswerModel> answers;
 
     public QNAModel(@JsonProperty("question") String question,
-                    @JsonProperty("id") long id,
+                    @JsonProperty("id") int id,
                     @JsonProperty("answers") ArrayList<AnswerModel> answers) {
         this.id = id;
         this.question = question;
         this.answers = answers;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -34,8 +34,6 @@ public class QNAModel {
     public Optional<AnswerModel> getTopAnswer() {
         return answers.stream().max(Comparator.comparingInt(AnswerModel::getVotes));
     }
-
-
 }
 
 

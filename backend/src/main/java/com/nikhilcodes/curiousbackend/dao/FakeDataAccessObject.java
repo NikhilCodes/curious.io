@@ -36,4 +36,9 @@ public class FakeDataAccessObject implements QNADao {
             return new ArrayList<QNAModel>();
         }
     }
+
+    @Override
+    public void addQuestion(QNAModel question, int id) {
+        db.add(new QNAModel(question.getQuestion(), id, new ArrayList<>()));
+    }
 }

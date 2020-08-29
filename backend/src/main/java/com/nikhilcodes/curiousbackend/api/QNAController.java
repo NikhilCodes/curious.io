@@ -3,10 +3,7 @@ package com.nikhilcodes.curiousbackend.api;
 import com.nikhilcodes.curiousbackend.model.QNAModel;
 import com.nikhilcodes.curiousbackend.service.QNAService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,10 @@ public class QNAController {
             page = 0;
         }
         return qnaService.get10QNAs(page * 10);
+    }
+
+    @PostMapping
+    public void addQuestion(@RequestBody QNAModel question) {
+        qnaService.addQuestion(question);
     }
 }
