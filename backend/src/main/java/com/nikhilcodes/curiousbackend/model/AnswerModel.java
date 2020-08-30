@@ -9,7 +9,7 @@ public class AnswerModel {
         this.votes = votes;
     }
 
-    int getVotes() {
+    public int getVotes() {
         return votes;
     }
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/qna")
@@ -28,5 +29,10 @@ public class QNAController {
     @PostMapping
     public void addQuestion(@RequestBody QNAModel question) {
         qnaService.addQuestion(question);
+    }
+
+    @GetMapping(path = "/{id}")
+    public Optional<QNAModel> getQNA(@PathVariable("id") int id) {
+        return qnaService.getQNA(id);
     }
 }
