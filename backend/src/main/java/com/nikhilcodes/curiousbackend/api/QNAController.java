@@ -1,5 +1,6 @@
 package com.nikhilcodes.curiousbackend.api;
 
+import com.nikhilcodes.curiousbackend.model.AnswerModel;
 import com.nikhilcodes.curiousbackend.model.QNAModel;
 import com.nikhilcodes.curiousbackend.service.QNAService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class QNAController {
     @GetMapping(path = "/{id}")
     public Optional<QNAModel> getQNA(@PathVariable("id") int id) {
         return qnaService.getQNA(id);
+    }
+
+    @PutMapping(path="/{id}")
+    public void addAnswer(@PathVariable("id") int id, @RequestBody AnswerModel answer) {
+        qnaService.addAnswer(id, answer);
     }
 }

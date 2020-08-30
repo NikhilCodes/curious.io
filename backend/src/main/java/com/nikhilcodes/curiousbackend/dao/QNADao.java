@@ -1,5 +1,6 @@
 package com.nikhilcodes.curiousbackend.dao;
 
+import com.nikhilcodes.curiousbackend.model.AnswerModel;
 import com.nikhilcodes.curiousbackend.model.QNAModel;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface QNADao {
     void addQuestion(QNAModel question, int id);
 
     Optional<QNAModel> getQNAById(int id);
+
+    void addAnswerToQuestionById(int id, AnswerModel answer);
 }

@@ -7,19 +7,30 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.PriorityQueue;
 
 @Repository("QNA_DB")
 public class FakeDataAccessObject implements QNADao {
     private static final ArrayList<QNAModel> db = new ArrayList<>(
             List.of(
-                    new QNAModel("What is the definition of shit??", 123456, new ArrayList<>(
-                            List.of(new AnswerModel("Stuff that comes out after you eat!", 4), new AnswerModel("Just die already!", 20))
+                    new QNAModel("What is the definition of shit??", 123456, new ArrayList<AnswerModel>(
+                            List.of(
+                                    new AnswerModel("Just die already!", 42),
+                                    new AnswerModel("Stuff people do after eating stuff.", 20)
+                            )
                     )),
-                    new QNAModel("What is JsonWebToken?", 100000, new ArrayList<>(
-                            List.of(new AnswerModel("JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed.\n", 10))
+                    new QNAModel("What is JsonWebToken?", 100000, new ArrayList<AnswerModel>(
+                            List.of(
+                                    new AnswerModel("Google JWT! Thank me later.", 102),
+                                    new AnswerModel("JSON Web Token is an Internet standard for creating data with optional signature and/or ... JWT relies on other JSON-based standards: JSON Web Signature and JSON Web Encryption", 20)
+                            )
                     )),
-                    new QNAModel("Why are you such an Idiot?", 111111, new ArrayList<>(
-                            List.of(new AnswerModel("Becoz I'm a fukin Genius!", 30))
+                    new QNAModel("Why are you such an Idiot?", 111111, new ArrayList<AnswerModel>(
+                            List.of(
+                                    new AnswerModel("Coz imma fukin genius", 1000),
+                                    new AnswerModel("IDK, why do you ask?", 2),
+                                    new AnswerModel("Because, I'm an Idiot, I guess! ", 31)
+                            )
                     ))
             )
     );
@@ -39,11 +50,21 @@ public class FakeDataAccessObject implements QNADao {
 
     @Override
     public void addQuestion(QNAModel question, int id) {
-        db.add(new QNAModel(question.getQuestion(), id, new ArrayList<>()));
+        db.add(new QNAModel(question.getQuestion(), id, new ArrayList<AnswerModel>()));
     }
 
     @Override
     public Optional<QNAModel> getQNAById(int id) {
         return db.stream().filter(qna -> qna.getId() == id).findFirst();
+    }
+
+    @Override
+    public void addAnswerToQuestionById(int id, AnswerModel answer) {
+        for (QNAModel qnaModel : db) {
+            if (qnaModel.getId() == id) {
+                qnaModel.addAnswer(answer);
+                return;
+            }
+        }
     }
 }

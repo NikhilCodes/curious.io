@@ -1,6 +1,7 @@
 package com.nikhilcodes.curiousbackend.service;
 
 import com.nikhilcodes.curiousbackend.dao.QNADao;
+import com.nikhilcodes.curiousbackend.model.AnswerModel;
 import com.nikhilcodes.curiousbackend.model.QNAModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,5 +29,9 @@ public class QNAService {
 
     public Optional<QNAModel> getQNA(int id) {
         return qnaDao.getQNAById(id);
+    }
+
+    public void addAnswer(int id, AnswerModel answer) {
+        qnaDao.addAnswerToQuestionById(id, answer);
     }
 }
