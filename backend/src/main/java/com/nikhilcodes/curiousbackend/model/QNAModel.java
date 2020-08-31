@@ -6,18 +6,18 @@ import java.util.*;
 
 public class QNAModel {
     final private String question;
-    final private int id;
+    final private String id;
     final private List<AnswerModel> answers;
 
     public QNAModel(@JsonProperty("question") String question,
-                    @JsonProperty("id") int id,
+                    @JsonProperty("id") String id,
                     @JsonProperty("answers") List<AnswerModel> answers) {
         this.id = id;
         this.question = question;
         this.answers = answers;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -30,7 +30,9 @@ public class QNAModel {
     }
 
     public void addAnswer(AnswerModel answer) {
-        answers.add(new AnswerModel(answer.getAnswer(), answer.getAnswer().length()));
+        int upperBound = 999999999;
+        int lowerBound = 1000;
+        answers.add(new AnswerModel(answer.getAnswer(), "_" + ((Number) (lowerBound + new Random().nextInt(upperBound - lowerBound))).toString(), answer.getAnswer().length()));
     }
 
     public Optional<AnswerModel> getTopAnswer() {

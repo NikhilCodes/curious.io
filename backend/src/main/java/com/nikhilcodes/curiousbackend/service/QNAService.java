@@ -27,11 +27,11 @@ public class QNAService {
         qnaDao.addQuestion(question);
     }
 
-    public Optional<QNAModel> getQNA(int id) {
+    public Optional<QNAModel> getQNA(String id) {
         return qnaDao.getQNAById(id);
     }
 
-    public void addAnswer(int id, AnswerModel answer) {
+    public void addAnswer(String id, AnswerModel answer) {
         qnaDao.addAnswerToQuestionById(id, answer);
     }
 }
