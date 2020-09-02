@@ -24,7 +24,7 @@ public class QNAController {
         if (page == null) {
             page = 0;
         }
-        return qnaService.get10QNAs(page * 10);
+        return qnaService.get10QNAs(page*10);
     }
 
     @PostMapping
@@ -33,12 +33,12 @@ public class QNAController {
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<QNAModel> getQNA(@PathVariable("id") String id) {
+    public Optional<QNAModel> getQNA(@PathVariable("id") int id) {
         return qnaService.getQNA(id);
     }
 
     @PutMapping(path = "/{id}")
-    public void addAnswer(@PathVariable("id") String id, @RequestBody AnswerModel answer) {
+    public void addAnswer(@PathVariable("id") int id, @RequestBody AnswerModel answer) {
         qnaService.addAnswer(id, answer);
     }
 }

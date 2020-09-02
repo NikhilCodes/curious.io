@@ -12,10 +12,10 @@ import java.util.Optional;
 
 @Service
 public class QNAService {
-    final private QNADao qnaDao;
+    private final QNADao qnaDao;
 
     @Autowired
-    public QNAService(@Qualifier("QNA_DB") QNADao qnaDao) {
+    public QNAService(@Qualifier("postgres") QNADao qnaDao) {
         this.qnaDao = qnaDao;
     }
 
@@ -27,11 +27,11 @@ public class QNAService {
         qnaDao.addQuestion(question);
     }
 
-    public Optional<QNAModel> getQNA(String id) {
+    public Optional<QNAModel> getQNA(int id) {
         return qnaDao.getQNAById(id);
     }
 
-    public void addAnswer(String id, AnswerModel answer) {
+    public void addAnswer(int id, AnswerModel answer) {
         qnaDao.addAnswerToQuestionById(id, answer);
     }
 }

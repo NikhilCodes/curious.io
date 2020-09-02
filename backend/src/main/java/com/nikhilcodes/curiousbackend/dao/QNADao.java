@@ -13,12 +13,12 @@ public interface QNADao {
     default void addQuestion(QNAModel question) {
         int upperBound = 999999999;
         int lowerBound = 1000;
-        addQuestion(question, ((Number) (lowerBound + new Random().nextInt(upperBound - lowerBound))).toString());
+        addQuestion(question, lowerBound + new Random().nextInt(upperBound - lowerBound));
     }
 
-    void addQuestion(QNAModel question, String id);
+    void addQuestion(QNAModel question, int id);
 
-    Optional<QNAModel> getQNAById(String id);
+    Optional<QNAModel> getQNAById(int id);
 
-    void addAnswerToQuestionById(String id, AnswerModel answer);
+    void addAnswerToQuestionById(int id, AnswerModel answer);
 }
