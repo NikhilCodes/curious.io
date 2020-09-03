@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Repository("postgres")
 public class PostgresDataAccessObject implements QNADao {
@@ -27,23 +28,18 @@ public class PostgresDataAccessObject implements QNADao {
         return jdbcTemplate.query(query_sql, (resultSet, i) -> {
             int q_id = resultSet.getInt("id");
             String question = resultSet.getString("question");
-            jdbcTemplate.query(String.format("SELECT id, answer, votes FROM answers_db WHERE question_id = %d", q_id), (answerSet, i1) -> {
-                return new AnswerModel(answerSet.getString("answer"), answerSet.getInt("id"), answerSet.getInt("votes"));
-//                System.out.println(answerSet.getString("answer"));
-            });
+            jdbcTemplate.query(String.format("SELECT id, answer, votes FROM answers_db WHERE question_id = %d", q_id), (answerSet, i1) -> new AnswerModel(answerSet.getString("answer"), answerSet.getInt("id"), answerSet.getInt("votes")));
             return new QNAModel(
                     question,
                     q_id,
-                    jdbcTemplate.query(String.format("SELECT id, answer, votes FROM answers_db WHERE question_id = %d", q_id), (answerSet, i1) -> {
-                        return new AnswerModel(answerSet.getString("answer"), answerSet.getInt("id"), answerSet.getInt("votes"));
-                    })
+                    jdbcTemplate.query(String.format("SELECT id, answer, votes FROM answers_db WHERE question_id = %d", q_id), (answerSet, i1) -> new AnswerModel(answerSet.getString("answer"), answerSet.getInt("id"), answerSet.getInt("votes")))
             );
         });
     }
 
     @Override
     public void addQuestion(QNAModel question, int id) {
-        db.add(new QNAModel(question.getQuestion(), id, new ArrayList<AnswerModel>()));
+        jdbcTemplate.update("INSERT INTO questions_db (id, question) VALUES (?, ?)", id, question.getQuestion());
     }
 
     @Override
@@ -70,11 +66,15 @@ public class PostgresDataAccessObject implements QNADao {
 
     @Override
     public void addAnswerToQuestionById(int id, AnswerModel answer) {
-        for (QNAModel qnaModel : db) {
-            if (qnaModel.getId() == id) {
-                qnaModel.addAnswer(answer);
-                return;
-            }
-        }
+//        for (QNAModel qnaModel : db) {
+//            if (qnaModel.getId() == id) {
+//                qnaModel.addAnswer(answer);
+//                return;
+//            }
+//        }
+        int upperBound = 999999999;
+        int lowerBound = 1000;
+        int answer_id = lowerBound + new Random().nextInt(upperBound - lowerBound);
+        jdbcTemplate.update("INSERT INTO answers_db (id, answer, question_id, votes) VALUES (?, ?, ?, ?)", answer_id, answer.getAnswer(), id, 0);
     }
 }
