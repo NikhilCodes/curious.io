@@ -1,2 +1,7 @@
 # curious.io
-A Q&amp;A platform with SpringBoot as backend, and React as frontend.
+A simple Q&amp;A platform.
+
+### Tools used:
+ - Java (Springboot) [**backend**]
+ - NodeJS (React.js) [**frontend**]
+ - Postgresql [**database**]
