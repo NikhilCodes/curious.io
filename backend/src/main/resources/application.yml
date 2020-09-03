@@ -2,7 +2,7 @@ app:
   datasource:
     jdbc-url: jdbc:postgresql://localhost:5432/curious_db
     username: alpha-n1khil
-    password: shield3120
+    password: 123456
     pool-size: 30
 
 spring:
