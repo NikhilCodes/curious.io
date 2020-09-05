@@ -13,8 +13,6 @@ import java.util.Random;
 
 @Repository("postgres")
 public class PostgresDataAccessObject implements QNADao {
-    private static final ArrayList<QNAModel> db = new ArrayList<>(
-    );
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -66,12 +64,6 @@ public class PostgresDataAccessObject implements QNADao {
 
     @Override
     public void addAnswerToQuestionById(int id, AnswerModel answer) {
-//        for (QNAModel qnaModel : db) {
-//            if (qnaModel.getId() == id) {
-//                qnaModel.addAnswer(answer);
-//                return;
-//            }
-//        }
         int upperBound = 999999999;
         int lowerBound = 1000;
         int answer_id = lowerBound + new Random().nextInt(upperBound - lowerBound);

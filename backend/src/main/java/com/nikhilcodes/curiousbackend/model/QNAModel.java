@@ -2,7 +2,11 @@ package com.nikhilcodes.curiousbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+
 
 public class QNAModel {
     final private String question;
