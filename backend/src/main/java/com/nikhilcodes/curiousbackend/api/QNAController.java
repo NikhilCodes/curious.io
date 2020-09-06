@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/qna")
 public class QNAController {
@@ -24,7 +25,7 @@ public class QNAController {
         if (page == null) {
             page = 0;
         }
-        return qnaService.get10QNAs(page*10);
+        return qnaService.get10QNAs(page * 10);
     }
 
     @PostMapping
