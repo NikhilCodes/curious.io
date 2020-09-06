@@ -8,17 +8,23 @@ import java.util.*;
 
 public class QNAModel {
     final private String question;
+    final private String body;
     final private int id;
     final private List<AnswerModel> answers;
+    final private int votes;
     final private Date addedOn;
 
     public QNAModel(@JsonProperty("question") String question,
+                    @JsonProperty("body") String body,
                     @JsonProperty("id") int id,
                     @JsonProperty("answers") List<AnswerModel> answers,
+                    @JsonProperty("votes") int votes,
                     @JsonProperty("addedOn") Date addedOn) {
+        this.body = body;
         this.id = id;
         this.question = question;
         this.answers = answers;
+        this.votes = votes;
         this.addedOn = addedOn;
     }
 
@@ -28,6 +34,10 @@ public class QNAModel {
 
     public String getQuestion() {
         return question;
+    }
+
+    public String getBody() {
+        return body;
     }
 
     public List<AnswerModel> getAnswers() {
@@ -47,6 +57,10 @@ public class QNAModel {
 
     public Optional<AnswerModel> getTopAnswer() {
         return answers.stream().max(Comparator.comparingInt(AnswerModel::getVotes));
+    }
+
+    public int getVotes() {
+        return votes;
     }
 
     public Date getAddedOn() {
