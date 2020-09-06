@@ -1,0 +1,33 @@
+.qna-cell {
+  padding: 5px 5px;
+}
+
+.qna-cell p {
+  font-family: Quicksand, sans-serif;
+  font-weight: 500;
+}
+
+.qna-cell a {
+  font-size: 22px;
+  font-family: Quicksand, sans-serif;
+  font-weight: 600;
+  color: darkslateblue;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.qna-cell a:hover {
+  color: #2662f6;
+}
+
+
+.qna-stats h4 {
+  font-family: Quicksand, sans-serif;
+  font-size: 12px;
+}
+
+.qna-stats h2 {
+  font-family: Quicksand, sans-serif;
+  font-size: 18px;
+}

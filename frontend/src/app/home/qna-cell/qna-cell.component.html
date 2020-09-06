@@ -1,0 +1,14 @@
+<div class="qna-cell">
+  <div class="row">
+    <div class="col-2 text-center qna-stats">
+      <h2>0</h2>
+      <h4>Votes</h4>
+      <h2>0</h2>
+      <h4>Answers</h4>
+    </div>
+    <div class="col-10">
+      <a href="question/{{qnaObject.id}}">{{qnaObject.question}}</a>
+      <p>{{qnaObject.topAnswer.answer.length > 150?qnaObject.topAnswer.answer.substring(0,135) + " ...":qnaObject.topAnswer.answer}}</p>
+    </div>
+  </div>
+</div>
