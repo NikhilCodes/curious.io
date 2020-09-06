@@ -7,6 +7,7 @@ import { TopbarComponent } from './topbar/topbar.component';
 import { HomeComponent } from './home/home.component';
 import { QnaCellComponent } from './home/qna-cell/qna-cell.component';
 import { QNAPageComponent } from './qnapage/qnapage.component';
+import { AnswerCellComponent } from './qnapage/answer-cell/answer-cell.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { QNAPageComponent } from './qnapage/qnapage.component';
     TopbarComponent,
     HomeComponent,
     QnaCellComponent,
-    QNAPageComponent
+    QNAPageComponent,
+    AnswerCellComponent
   ],
   imports: [
     BrowserModule,

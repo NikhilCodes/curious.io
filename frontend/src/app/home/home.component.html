@@ -1,12 +1,12 @@
-<div class="container pt-3" style="border-left: slategrey 1px solid;border-right: slategrey 1px solid;border-bottom: slategrey 1px solid;padding: 0;">
+<div class="container pt-3" style="border-left: #cecece 1px solid;border-right: #cecece 1px solid;border-bottom: #cecece 1pt solid;padding: 0;">
   <div class="pl-5 font-weight-bold">
     <span class="font-weight-light" style="font-size: 28px">All questions</span>
     <button class="float-right mr-5">Ask Question</button>
-    <br><br>
+    <br>
   </div>
   <div>
     <div *ngFor="let qnaObj of homeQNAsData">
-      <hr color="slategrey">
+      <hr height="0.5pt" color="#dedede">
       <app-qna-cell [qnaObject]="qnaObj"></app-qna-cell>
     </div>
   </div>

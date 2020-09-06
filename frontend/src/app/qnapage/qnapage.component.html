@@ -1,3 +1,22 @@
 <div class="container" *ngIf="qnaObj!=undefined">
-  {{qnaObj.question}}
+  <br>
+  <button class="ask-button">Ask Question</button>
+  <h2>
+    {{qnaObj.question}}
+  </h2>
+  <div>
+    Asked On: {{qnaObj["addedOn"]}}
+  </div>
+  <hr>
+  <p>
+    {{qnaObj.body}}
+  </p>
+  <hr>
+
+  <h4>{{qnaObj["answers"].length}} Answer{{qnaObj["answers"].length>1?'s':''}}</h4>
+  <br>
+  <div *ngFor="let answerObj of qnaObj['answers']">
+    <app-answer-cell [answerObj]="answerObj"></app-answer-cell>
+  </div>
+
 </div>

@@ -5,6 +5,7 @@ button {
   padding: 10px 10px;
   background-color: #2ea3d9;
   color: white;
+  transition-duration: 0.3s;
 }
 
 button:hover {

@@ -1,7 +1,11 @@
 .top-bar-title {
   color: white;
   font-family: Quicksand, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
   cursor: pointer;
   float: left;
   position: relative;
+  text-decoration: none;
+  margin-bottom: 12px;
 }

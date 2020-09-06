@@ -1,0 +1,32 @@
+.ask-button {
+  float: right;
+  font-family: Quicksand, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: #3f97dc;
+  padding: 15px 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition-duration: 0.3s;
+}
+
+.ask-button:hover {
+  background-color: #2e8fd9;
+}
+
+.ask-button:active {
+  background-color: #2e6dd9;
+}
+
+h2 {
+  font-family: Quicksand, sans-serif;
+  text-wrap: normal;
+  font-size: 27px;
+  font-weight: 600;
+}
+
+p {
+  font-size: 18px;
+}
