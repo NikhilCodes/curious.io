@@ -1,5 +1,5 @@
 # curious.io
-A simple Q&amp;A platform.
+A sophisticated Q&amp;A platform.
 
 ### Tools used:
  - Java (Springboot) [**backend**]
