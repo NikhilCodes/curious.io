@@ -4,7 +4,11 @@
     <h5 class="text-center">{{answerObj['votes']}}</h5>
     <svg fill="grey" width="36" height="36" viewBox="0 0 36 36"><path d="M2 10h32L18 26 2 10z"></path></svg>
   </div>
-  <div style="grid-column: 2;white-space: pre-wrap;">{{answerObj['answer']}}</div>
+  <div style="grid-column: 2;white-space: pre-wrap;">
+    {{answerObj['answer']}}
+    <br><br>
+    <div class="float-right">Answered on {{answerObj["addedOn"]}}</div>
+  </div>
 </div>
 <hr>
 <br>

@@ -7,7 +7,7 @@ import {QNAService} from '../qna.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  homeQNAsData: object = [];
+  homeQNAsData: object = null;
 
   constructor(service: QNAService) {
     service.getQNAs().then(data => {
