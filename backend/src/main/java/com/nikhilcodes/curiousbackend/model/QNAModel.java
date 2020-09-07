@@ -55,9 +55,10 @@ public class QNAModel {
         );
     }
 
-    public Optional<AnswerModel> getTopAnswer() {
-        return answers.stream().max(Comparator.comparingInt(AnswerModel::getVotes));
-    }
+//      //Commenting out below function, cuz it's kinda redundant for now.
+//    public Optional<AnswerModel> getTopAnswer() {
+//        return answers.stream().max(Comparator.comparingInt(AnswerModel::getVotes));
+//    }
 
     public int getVotes() {
         return votes;

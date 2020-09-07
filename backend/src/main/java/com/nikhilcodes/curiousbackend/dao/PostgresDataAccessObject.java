@@ -36,7 +36,7 @@ public class PostgresDataAccessObject implements QNADao {
                     q_id,
                     jdbcTemplate.query(
                             String.format("SELECT id, answer, votes, added_on FROM answers_db WHERE question_id = %d ORDER BY added_on DESC", q_id),
-                            (answerSet, i1) -> new AnswerModel(
+                            (answerSet, i_) -> new AnswerModel(
                                     answerSet.getString("answer"),
                                     answerSet.getInt("id"),
                                     answerSet.getInt("votes"),
