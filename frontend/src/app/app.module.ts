@@ -9,6 +9,8 @@ import { QnaCellComponent } from './home/qna-cell/qna-cell.component';
 import { QNAPageComponent } from './qnapage/qnapage.component';
 import { AnswerCellComponent } from './qnapage/answer-cell/answer-cell.component';
 import { FooterComponent } from './footer/footer.component';
+import { CreateAnswerComponent } from './qnapage/create-answer/create-answer.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { FooterComponent } from './footer/footer.component';
     QnaCellComponent,
     QNAPageComponent,
     AnswerCellComponent,
-    FooterComponent
+    FooterComponent,
+    CreateAnswerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
