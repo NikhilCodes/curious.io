@@ -6,6 +6,4 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./topbar.component.css']
 })
 export class TopbarComponent {
-  @Input()
-  title: string;
 }
