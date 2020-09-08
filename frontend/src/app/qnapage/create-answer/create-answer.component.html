@@ -5,9 +5,9 @@
   </div>
 </div>
 <div>
-  <textarea [(ngModel)]="editorText" id="answer-body-editor">
-
-  </textarea>
+  <textarea [(ngModel)]="editorTextMd" (input)="convertMdToHtml()" id="answer-body-editor"></textarea>
+  <button class="add-answer-button">Post Your Answer</button>
+  <div contenteditable="true" [innerHTML]="editorTextConverted"></div>
 </div>
 
 
