@@ -14,6 +14,5 @@ export class QNAPageComponent {
     service.getQNAById(parseInt(this.route.snapshot.paramMap.get('id'), 10)).then(data => {
       this.qnaObj = data;
     });
-
   }
 }

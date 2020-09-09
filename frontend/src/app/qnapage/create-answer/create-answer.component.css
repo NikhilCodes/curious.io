@@ -45,3 +45,7 @@ textarea:focus {
 .add-answer-button:active {
   background-color: #2e6dd9;
 }
+
+.add-answer-button:disabled {
+  background-color: darkgrey;
+}

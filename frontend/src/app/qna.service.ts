@@ -25,4 +25,17 @@ export class QNAService {
       },
     })).json());
   }
+
+  async addAnswerToQuestionById(id: number, answer: string): Promise<void> {
+    await fetch(this.qnaApiBaseUrl + `${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+        answer: `${answer}`
+      })
+    });
+  }
 }

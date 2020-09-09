@@ -10,6 +10,5 @@
     <div [innerHTML]="editorTextConverted" class="answer-body-preview col"></div>
   </div>
   <br>
-  <button class="add-answer-button row">Post Your Answer</button>
-
+  <button [disabled]="newAnswerButtonDisabled" (click)="addAnswerToQuestionById(questionId, editorTextConverted)" class="add-answer-button row">Post Your Answer</button>
 </div>

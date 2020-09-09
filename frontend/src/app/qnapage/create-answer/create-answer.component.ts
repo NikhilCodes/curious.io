@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {QNAService} from '../../qna.service';
 
 @Component({
   selector: 'app-create-answer',
@@ -9,12 +10,28 @@ export class CreateAnswerComponent implements OnInit {
   editorTextMd = '';
   editorTextConverted = '';
   editorHTMLObject: HTMLElement;
+  newAnswerButtonDisabled = false;
+
+  @Input() questionId: number;
+
+  addAnswerToQuestionById: (id, answer) => void;
+
+  constructor(service: QNAService) {
+    // Services
+    this.addAnswerToQuestionById = (id, answer) => {
+      this.newAnswerButtonDisabled = true;
+      service.addAnswerToQuestionById(id, answer).then(r => window.location.reload());
+    };
+    //
+  }
 
   ngOnInit(): void {
     this.editorHTMLObject = document.getElementById('answer-body-editor');
   }
 
+
   convertMdToHtml(): void {
+    // Pseudo-Md --> Html
     this.editorTextConverted = this.editorTextMd;
     let tagCount = 0;
     this.editorTextConverted = this.editorTextConverted.replace(/\n/g, '<br>');
@@ -54,6 +71,7 @@ export class CreateAnswerComponent implements OnInit {
     }
 
     this.editorTextConverted = lines.join('<br>');
+    //
   }
 
   createBoldText(): void {
