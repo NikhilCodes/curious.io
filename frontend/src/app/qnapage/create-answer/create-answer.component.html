@@ -1,13 +1,15 @@
-<div class="create-answer-main-body">
-  <div>
-    <strong (click)="createBoldText()" style="cursor: pointer;">B</strong>&nbsp;
-    <i (click)="createItalicText()" style="font-family: 'Source Code Pro',sans-serif">I</i>
-  </div>
-</div>
 <div>
-  <textarea [(ngModel)]="editorTextMd" (input)="convertMdToHtml()" id="answer-body-editor"></textarea>
-  <button class="add-answer-button">Post Your Answer</button>
-  <div contenteditable="true" [innerHTML]="editorTextConverted"></div>
+  <div class="create-answer-options-body row">
+    <div>
+      <strong (click)="createBoldText()" style="cursor: pointer;">B</strong>&nbsp;
+      <i (click)="createItalicText()" style="font-family: 'Source Code Pro',sans-serif">I</i>
+    </div>
+  </div>
+  <div class="row">
+    <textarea [(ngModel)]="editorTextMd" (input)="convertMdToHtml()" class="answer-body-editor col"></textarea>
+    <div [innerHTML]="editorTextConverted" class="answer-body-preview col"></div>
+  </div>
+  <br>
+  <button class="add-answer-button row">Post Your Answer</button>
+
 </div>
-
-

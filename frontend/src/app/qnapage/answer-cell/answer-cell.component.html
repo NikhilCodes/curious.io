@@ -1,11 +1,15 @@
 <div style="display: grid;grid-template-columns: max-content;">
   <div style="grid-column: 1;padding: 10px 20px">
-    <svg width="36" height="36" fill="grey" viewBox="0 0 36 36"><path d="M2 26h32L18 10 2 26z"></path></svg>
+    <svg width="36" height="36" fill="grey" viewBox="0 0 36 36">
+      <path d="M2 26h32L18 10 2 26z"></path>
+    </svg>
     <h5 class="text-center">{{answerObj['votes']}}</h5>
-    <svg fill="grey" width="36" height="36" viewBox="0 0 36 36"><path d="M2 10h32L18 26 2 10z"></path></svg>
+    <svg fill="grey" width="36" height="36" viewBox="0 0 36 36">
+      <path d="M2 10h32L18 26 2 10z"></path>
+    </svg>
   </div>
   <div style="grid-column: 2;white-space: pre-wrap;">
-    {{answerObj['answer']}}
+    <div [innerHTML]="answerObj['answer']"></div>
     <br><br>
     <div class="float-right">Answered on {{answerObj["addedOn"]}}</div>
   </div>

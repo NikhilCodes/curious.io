@@ -42,14 +42,14 @@ export class CreateAnswerComponent implements OnInit {
       if (lines[i].trim().length === 1) {
         lines[i] = lines[i].replace('-', '<hr color="black">');
       } else if (lines[i].startsWith('# ')) {
-        lines[i] = lines[i].replace('# ', '<h1>');
-        lines[i] += '</h1><hr color="grey">';
-      } else if (lines[i].startsWith('## ')) {
-        lines[i] = lines[i].replace('## ', '<h2>');
+        lines[i] = lines[i].replace('# ', '<h2>');
         lines[i] += '</h2><hr color="grey">';
-      } else if (lines[i].startsWith('### ')) {
-        lines[i] = lines[i].replace('### ', '<h3>');
+      } else if (lines[i].startsWith('## ')) {
+        lines[i] = lines[i].replace('## ', '<h3>');
         lines[i] += '</h3><hr color="grey">';
+      } else if (lines[i].startsWith('### ')) {
+        lines[i] = lines[i].replace('### ', '<h4>');
+        lines[i] += '</h4><hr color="grey">';
       }
     }
 
