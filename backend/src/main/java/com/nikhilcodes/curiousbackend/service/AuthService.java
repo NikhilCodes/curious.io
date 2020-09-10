@@ -1,6 +1,8 @@
 package com.nikhilcodes.curiousbackend.service;
 
+import com.nikhilcodes.curiousbackend.dao.AuthDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,12 +19,14 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityService extends WebSecurityConfigurerAdapter {
+public class AuthService extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
+    private final AuthDao authDao;
 
     @Autowired
-    public SecurityService(DataSource dataSource) {
+    public AuthService(@Qualifier("user-dao")AuthDao authDao, DataSource dataSource) {
+        this.authDao = authDao;
         this.dataSource = dataSource;
     }
 
@@ -72,5 +76,9 @@ public class SecurityService extends WebSecurityConfigurerAdapter {
         return null;
     }
 
-
+    public SecurityContext createUser(String username, String email, String passwordPlain) {
+        String passwordHashed = passwordEncoder().encode(passwordPlain);
+        authDao.createUser(username, email, passwordHashed);
+        return loginWithEmailAndPassword(email, passwordPlain);
+    }
 }

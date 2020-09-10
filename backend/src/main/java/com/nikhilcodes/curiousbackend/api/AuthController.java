@@ -1,11 +1,7 @@
 package com.nikhilcodes.curiousbackend.api;
 
-import com.nikhilcodes.curiousbackend.service.SecurityService;
+import com.nikhilcodes.curiousbackend.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.jaas.SecurityContextLoginModule;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -18,19 +14,29 @@ import javax.servlet.http.HttpSession;
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
 @RequestMapping("/auth")
-public class SecurityController {
-    final SecurityService securityService;
+public class AuthController {
+    final AuthService authService;
 
     @Autowired
-    public SecurityController(SecurityService securityService) {
-        this.securityService = securityService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @PostMapping(path = "/register")
+    public void register(HttpServletRequest request, HttpServletResponse response) {
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        SecurityContext securityContext = authService.createUser(username, email, password);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
     }
 
     @PostMapping(path = "/login")
     public void login(HttpServletRequest request, HttpServletResponse response) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        SecurityContext securityContext = securityService.loginWithEmailAndPassword(email, password);
+        SecurityContext securityContext = authService.loginWithEmailAndPassword(email, password);
         HttpSession session = request.getSession(true);
         session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
     }

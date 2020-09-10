@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-@Repository("postgres")
-public class PostgresDataAccessObject implements QNADao {
+@Repository("qna-data")
+public class QNADataAccess implements QNADao {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public PostgresDataAccessObject(JdbcTemplate jdbcTemplate) {
+    public QNADataAccess(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

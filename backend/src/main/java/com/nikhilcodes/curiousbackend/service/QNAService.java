@@ -15,7 +15,7 @@ public class QNAService {
     private final QNADao qnaDao;
 
     @Autowired
-    public QNAService(@Qualifier("postgres") QNADao qnaDao) {
+    public QNAService(@Qualifier("qna-data") QNADao qnaDao) {
         this.qnaDao = qnaDao;
     }
 
