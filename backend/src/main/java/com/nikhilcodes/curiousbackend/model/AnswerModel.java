@@ -10,7 +10,7 @@ public class AnswerModel {
     final private int id;
     final private Date addedOn;
 
-    public AnswerModel(@JsonProperty("answer") String answer, @JsonProperty("_id") int id, int votes, Date addedOn) {
+    public AnswerModel(@JsonProperty("answer") String answer, @JsonProperty("id") int id, int votes, Date addedOn) {
         this.answer = answer;
         this.id = id;
         this.votes = votes;
