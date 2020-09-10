@@ -1,3 +1,20 @@
+CREATE TABLE users_db
+(
+    id       INT PRIMARY KEY NOT NULL ,
+    username VARCHAR(25) UNIQUE NOT NULL,
+    email    VARCHAR(32) UNIQUE NOT NULL,
+    password VARCHAR(64) NOT NULL,
+    role     VARCHAR(16) NOT NULL ,
+    enabled  INT DEFAULT NULL
+);
+
+INSERT INTO users_db (id, username, email, password, role, enabled)
+VALUES (424242, '1carus42', 'admin@nixel.com', '$2a$10$0gr7INy2Vh9ElLle3mExy.Z1wKpkkwbRme.OmSossvYn1fr4lPUhW', 'USER', 1);
+
+INSERT INTO users_db (id, username, email, password, role, enabled)
+VALUES (999999, 'HeathCl!ff', 'nikhil.nixel@gmail.com', '$2a$10$YVtlaS89K0KVenSQOwQsm.ZTkZ4lLUsSw99AyhLnOYkP3TgqS9Y9K', 'ADMIN', 1);
+
+
 CREATE TABLE questions_db
 (
     id       INT PRIMARY KEY,
@@ -5,7 +22,6 @@ CREATE TABLE questions_db
     body     VARCHAR(2000),
     votes    INT,
     added_on DATE
-
 );
 
 INSERT INTO questions_db (id, question, body, votes, added_on)
