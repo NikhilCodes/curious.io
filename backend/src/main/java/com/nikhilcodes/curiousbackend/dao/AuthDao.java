@@ -1,5 +1,5 @@
 package com.nikhilcodes.curiousbackend.dao;
 
 public interface AuthDao {
-    public void createUser(String username, String email, String passwordPlain);
+    void createUser(String username, String email, String passwordPlain);
 }

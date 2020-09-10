@@ -2,6 +2,7 @@ package com.nikhilcodes.curiousbackend.dao;
 
 import com.nikhilcodes.curiousbackend.model.AnswerModel;
 import com.nikhilcodes.curiousbackend.model.QNAModel;
+import com.nikhilcodes.curiousbackend.utils.RandomIdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,6 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @Repository("qna-data")
 public class QNADataAccess implements QNADao {
@@ -78,9 +78,7 @@ public class QNADataAccess implements QNADao {
 
     @Override
     public void addAnswerToQuestionById(int id, AnswerModel answer) {
-        int upperBound = 999999999;
-        int lowerBound = 1000;
-        int answer_id = lowerBound + new Random().nextInt(upperBound - lowerBound);
+        int answer_id = RandomIdGenerator.generate();
         jdbcTemplate.update("INSERT INTO answers_db (id, answer, question_id, votes, added_on) VALUES (?, ?, ?, ?, ?)", answer_id, answer.getAnswer(), id, 0, new Date(Calendar.getInstance().getTimeInMillis()));
     }
 }

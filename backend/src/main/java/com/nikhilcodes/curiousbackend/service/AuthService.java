@@ -33,17 +33,6 @@ public class AuthService extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {
-//        String hash1 = "$2a$10$0gr7INy2Vh9ElLle3mExy.Z1wKpkkwbRme.OmSossvYn1fr4lPUhW";
-//        String hash2 = "$2a$10$YVtlaS89K0KVenSQOwQsm.ZTkZ4lLUsSw99AyhLnOYkP3TgqS9Y9K";
-//        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())
-//                .withUser("admin@nixel.com")
-//                .password(hash1)
-//                .roles("USER")
-//                .and()
-//                .withUser("nikhil.nixel@gmail.com")
-//                .password(hash2)
-//                .roles("ADMIN");
-
         auth.jdbcAuthentication().passwordEncoder(passwordEncoder())
                 .dataSource(dataSource)
                 .usersByUsernameQuery("SELECT email, password, enabled FROM users_db WHERE email=?") // NOTE: We are considering email as username from login-form

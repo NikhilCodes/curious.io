@@ -1,10 +1,10 @@
 package com.nikhilcodes.curiousbackend.dao;
 
+import com.nikhilcodes.curiousbackend.utils.RandomIdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.Random;
 
 @Repository("user-dao")
 public class AuthDataAccess implements AuthDao {
@@ -15,12 +15,9 @@ public class AuthDataAccess implements AuthDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
     @Override
     public void createUser(String username, String email, String passwordHashed) {
-        int upperBound = 999999999;
-        int lowerBound = 1000;
-        int user_id = lowerBound + new Random().nextInt(upperBound - lowerBound);
+        int user_id = RandomIdGenerator.generate();
 
         jdbcTemplate.update("INSERT INTO users_db (id, username, email, password, role, enabled) VALUES (?, ?, ?, ?, ?, ?)", user_id, username, email, passwordHashed, "USER", 1);
     }
