@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -26,11 +28,18 @@ public class SecurityService extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.inMemoryAuthentication()
+        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())
                 .withUser("admin@nixel.com")
-                .password("{noop}password")
-                .roles("USER");
+                .password(passwordEncoder().encode("password"))
+                .roles("USER")
+                .and()
+                .withUser("nikhil.nixel@gmail.com")
+                .password(passwordEncoder().encode("password"))
+                .roles("ADMIN");
+    }
 
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     public SecurityContext loginWithEmailAndPassword(String email, String password) {
