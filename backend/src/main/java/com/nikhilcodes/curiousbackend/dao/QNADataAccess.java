@@ -3,7 +3,6 @@ package com.nikhilcodes.curiousbackend.dao;
 import com.nikhilcodes.curiousbackend.model.AnswerModel;
 import com.nikhilcodes.curiousbackend.model.QNAModel;
 import com.nikhilcodes.curiousbackend.model.UserModel;
-import com.nikhilcodes.curiousbackend.utils.RandomIdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -91,7 +90,7 @@ public class QNADataAccess implements QNADao {
 
     @Override
     public UserModel getUserById(int id) {
-        return jdbcTemplate.queryForObject("SELECT username, email, role FROM users_db WHERE id=?", new Object[] {id}, (resultSet, i) -> new UserModel(
+        return jdbcTemplate.queryForObject("SELECT username, email, role FROM users_db WHERE id=?", new Object[]{id}, (resultSet, i) -> new UserModel(
                 id,
                 resultSet.getString("username"),
                 resultSet.getString("email"),
