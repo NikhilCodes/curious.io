@@ -23,15 +23,15 @@ public class QNAService {
         return qnaDao.get10QNAs(start);
     }
 
-    public void addQuestion(QNAModel question) {
-        qnaDao.addQuestion(question);
+    public void addQuestion(QNAModel question, String email) {
+        qnaDao.addQuestion(question, email);
     }
 
     public Optional<QNAModel> getQNA(int id) {
         return qnaDao.getQNAById(id);
     }
 
-    public void addAnswer(int id, AnswerModel answer) {
-        qnaDao.addAnswerToQuestionById(id, answer);
+    public void addAnswer(AnswerModel answer, int id, String email) {
+        qnaDao.addAnswerToQuestionById(answer, id, email);
     }
 }

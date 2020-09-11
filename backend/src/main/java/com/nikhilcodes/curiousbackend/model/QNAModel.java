@@ -13,19 +13,22 @@ public class QNAModel {
     final private List<AnswerModel> answers;
     final private int votes;
     final private Date addedOn;
+    final private UserModel addedBy;
 
     public QNAModel(@JsonProperty("question") String question,
                     @JsonProperty("body") String body,
                     @JsonProperty("id") int id,
                     @JsonProperty("answers") List<AnswerModel> answers,
                     @JsonProperty("votes") int votes,
-                    @JsonProperty("addedOn") Date addedOn) {
+                    @JsonProperty("addedOn") Date addedOn,
+                    @JsonProperty("addedBy") UserModel addedBy) {
         this.body = body;
         this.id = id;
         this.question = question;
         this.answers = answers;
         this.votes = votes;
         this.addedOn = addedOn;
+        this.addedBy = addedBy;
     }
 
     public int getId() {
@@ -44,17 +47,6 @@ public class QNAModel {
         return answers;
     }
 
-    public void addAnswer(AnswerModel answer) {
-        int upperBound = 999999999;
-        int lowerBound = 1000;
-        answers.add(new AnswerModel(
-                answer.getAnswer(),
-                (lowerBound + new Random().nextInt(upperBound - lowerBound)),
-                answer.getAnswer().length(),
-                new Date(Calendar.getInstance().getTimeInMillis()))
-        );
-    }
-
 //      //Commenting out below function, cuz it's kinda redundant for now.
 //    public Optional<AnswerModel> getTopAnswer() {
 //        return answers.stream().max(Comparator.comparingInt(AnswerModel::getVotes));
@@ -66,6 +58,10 @@ public class QNAModel {
 
     public Date getAddedOn() {
         return addedOn;
+    }
+
+    public UserModel getAddedBy() {
+        return addedBy;
     }
 }
 

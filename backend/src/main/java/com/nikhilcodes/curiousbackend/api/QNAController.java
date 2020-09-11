@@ -4,8 +4,11 @@ import com.nikhilcodes.curiousbackend.model.AnswerModel;
 import com.nikhilcodes.curiousbackend.model.QNAModel;
 import com.nikhilcodes.curiousbackend.service.QNAService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +32,8 @@ public class QNAController {
     }
 
     @PostMapping
-    public void addQuestion(@RequestBody QNAModel question) {
-        qnaService.addQuestion(question);
+    public void addQuestion(@CurrentSecurityContext(expression = "authentication.name") String email, @RequestBody QNAModel question) {
+        qnaService.addQuestion(question, email);
     }
 
     @GetMapping(path = "/{id}")
@@ -39,7 +42,7 @@ public class QNAController {
     }
 
     @PutMapping(path = "/{id}")
-    public void addAnswer(@PathVariable("id") int id, @RequestBody AnswerModel answer) {
-        qnaService.addAnswer(id, answer);
+    public void addAnswer(@CurrentSecurityContext(expression = "authentication.name") String email, @PathVariable("id") int id, @RequestBody AnswerModel answer) {
+        qnaService.addAnswer(answer, id, email);
     }
 }

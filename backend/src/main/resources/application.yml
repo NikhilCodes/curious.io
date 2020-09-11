@@ -13,4 +13,4 @@ server:
   servlet:
     session:
       cookie:
-        max-age: 60
+        max-age: 604800
