@@ -10,7 +10,7 @@ A sophisticated Q&amp;A platform.
 
 Make sure **JAVA_HOME** environment variable is set correctly.<br>
 Run the below code inside *backend* dir,<br>
-`./mvnw spring-boot:run --quiet `
+`$ ./mvnw spring-boot:run --quiet `
 
 Now once it starts successfully, the backend server will be up and running.
 
