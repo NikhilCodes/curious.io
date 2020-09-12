@@ -53,4 +53,9 @@ public class AuthController {
             cookie.setMaxAge(0);
         }
     }
+
+    @PostMapping("authenticated")
+    public void isAuthenticated(HttpServletRequest request) {
+        System.out.println(request.isRequestedSessionIdValid());
+    }
 }
