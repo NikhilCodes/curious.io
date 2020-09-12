@@ -55,7 +55,7 @@ public class AuthController {
     }
 
     @PostMapping("authenticated")
-    public void isAuthenticated(HttpServletRequest request) {
-        System.out.println(request.isRequestedSessionIdValid());
+    public boolean isAuthenticated(HttpServletRequest request) {
+        return request.isRequestedSessionIdValid();
     }
 }
