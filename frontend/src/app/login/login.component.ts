@@ -9,17 +9,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
   email: string;
   password: string;
   isLoggedIn: boolean;
   signInService: (email, password) => void;
 
   constructor(auth: AuthService, private router: Router) {
-    // if (isLoggedIn) {
-    //   this.router.navigate(['/']).then();
-    //   return;
-    // }
     auth.isAuthenticated$.subscribe((isAuth: boolean) => {
       this.isLoggedIn = isAuth;
       if (this.isLoggedIn !== false) {
