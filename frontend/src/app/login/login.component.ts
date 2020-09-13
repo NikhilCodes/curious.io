@@ -23,7 +23,6 @@ export class LoginComponent {
     auth.isAuthenticated$.subscribe((isAuth: boolean) => {
       this.isLoggedIn = isAuth;
       if (this.isLoggedIn !== false) {
-        console.log('HOME');
         this.router.navigate(['/']).then();
       }
     });

@@ -43,10 +43,11 @@ public class AuthService extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .cors().disable().httpBasic().and()
+                .cors().and()
                 .antMatcher("/api/**")
                 .authorizeRequests()
-                .requestMatchers(CorsUtils::isPreFlightRequest).authenticated();
+                .requestMatchers(CorsUtils::isPreFlightRequest)
+                .authenticated();
 
     }
 

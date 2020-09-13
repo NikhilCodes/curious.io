@@ -1,16 +1,23 @@
-<div class="container pt-5 pb-5 w-50">
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input [(ngModel)]="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<div class="container-fluid bg-secondary w-100 h-100 position-absolute" style="background: linear-gradient(30deg, #2dd3ff, #22007b)">
+
+  <h2 class="text-center mt-5 text-white">Curious.<span class="bg-white text-dark">io</span></h2>
+
+  <div class="bg-dark container-sm mt-5 text-white" style="border-radius: 10px">
+    <div class="container pt-5 pb-5 w-50">
+      <div class="h1 mb-3 bg-white text-dark">
+        Login
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input [(ngModel)]="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="pass">Password</label>
+        <input [(ngModel)]="password" type="password" class="form-control" id="pass" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="onSignIn()">Log In</button>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="pass">Password</label>
-    <input [(ngModel)]="password" type="password" class="form-control" id="pass" placeholder="Password">
-  </div>
-<!--  <div class="form-check">-->
-<!--    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-<!--    <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-<!--  </div>-->
-  <button type="submit" class="btn btn-primary" (click)="onSignIn()">Log In</button>
+
 </div>
