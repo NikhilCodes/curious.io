@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", allowCredentials = "true")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -41,7 +41,7 @@ public class AuthController {
         session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
     }
 
-    @PostMapping(path = "/logout")
+    @GetMapping(path = "/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         SecurityContextHolder.clearContext();

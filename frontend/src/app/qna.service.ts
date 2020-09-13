@@ -9,6 +9,7 @@ export class QNAService {
   async getQNAs(): Promise<object> {
     return await ((await fetch(this.qnaApiBaseUrl, {
       method: 'GET',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -19,6 +20,7 @@ export class QNAService {
   async getQNAById(id: number): Promise<object> {
     return await ((await fetch(this.qnaApiBaseUrl + `${id}`, {
       method: 'GET',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         // 'Content-Type': 'application/x-www-form-urlencoded',

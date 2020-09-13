@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsUtils;
 
 import javax.sql.DataSource;
 
@@ -42,10 +43,11 @@ public class AuthService extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
+                .cors().disable().httpBasic().and()
                 .antMatcher("/api/**")
                 .authorizeRequests()
-                .anyRequest()
-                .authenticated();
+                .requestMatchers(CorsUtils::isPreFlightRequest).authenticated();
+
     }
 
     public PasswordEncoder passwordEncoder() {

@@ -11,10 +11,12 @@ import { AnswerCellComponent } from './qnapage/answer-cell/answer-cell.component
 import { FooterComponent } from './footer/footer.component';
 import { CreateAnswerComponent } from './qnapage/create-answer/create-answer.component';
 import {FormsModule} from '@angular/forms';
+import {LoginComponent} from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     TopbarComponent,
     HomeComponent,
     QnaCellComponent,
