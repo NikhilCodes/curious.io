@@ -28,8 +28,10 @@ public class AuthController {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         SecurityContext securityContext = authService.createUser(username, email, password);
-        HttpSession session = request.getSession(true);
-        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+        if(securityContext != null) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+        }
     }
 
     @PostMapping(path = "/login")
@@ -37,8 +39,10 @@ public class AuthController {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         SecurityContext securityContext = authService.loginWithEmailAndPassword(email, password);
-        HttpSession session = request.getSession(true);
-        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+        if(securityContext != null) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+        }
     }
 
     @GetMapping(path = "/logout")

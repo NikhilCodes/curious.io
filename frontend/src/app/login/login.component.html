@@ -1,23 +1,41 @@
-<div class="container-fluid bg-secondary w-100 h-100 position-absolute" style="background: linear-gradient(30deg, #2dd3ff, #22007b)">
+<div class="container-fluid bg-secondary w-100 h-100 position-absolute"
+     style="background: linear-gradient(30deg, #2dd3ff, #22007b)">
 
   <h2 class="text-center mt-5 text-white">Curious.<span class="bg-white text-dark">io</span></h2>
 
   <div class="bg-dark container-sm mt-5 text-white" style="border-radius: 10px">
     <div class="container pt-5 pb-5 w-50">
       <div class="h1 mb-3 bg-white text-dark">
-        Login
+        <div *ngIf="authMode==1">Login</div>
+        <div *ngIf="authMode!=1">Sign Up</div>
+      </div>
+      <div class="form-group" *ngIf="authMode==-1">
+        <label for="username">Email address</label>
+        <input [(ngModel)]="username" type="text" class="form-control" id="username"
+               placeholder="Username">
       </div>
       <div class="form-group">
         <label for="email">Email address</label>
-        <input [(ngModel)]="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <input [(ngModel)]="email" type="email" class="form-control" id="email" aria-describedby="emailHelp"
+               placeholder="Enter email">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <div class="form-group">
         <label for="pass">Password</label>
         <input [(ngModel)]="password" type="password" class="form-control" id="pass" placeholder="Password">
       </div>
-      <button type="submit" class="btn btn-primary" (click)="onSignIn()">Log In</button>
+      <button *ngIf="authMode==1" type="submit" class="btn btn-primary" (click)="onSignIn()">Log In</button>
+      <button *ngIf="authMode==-1" type="submit" class="btn btn-primary" (click)="onSignUp()">Sign Up</button>
+      <br><br>
+      <span class="text-light">
+        <span *ngIf="authMode==1">New</span>
+        <span *ngIf="authMode==-1">Been</span>
+        here?
+      </span>
+      <span (click)="toggleAuthMode()" class="text-info" style="cursor: pointer">
+        <span *ngIf="authMode==1">Sign Up</span>
+        <span *ngIf="authMode==-1">Login</span>
+      </span>
     </div>
   </div>
-
 </div>

@@ -32,7 +32,7 @@ export class AuthService {
     });
   }
 
-  async signInWithEmailAndPassword(email, password): Promise<void> {
+  async signInWithEmailAndPassword(email: string, password: string): Promise<void> {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
@@ -40,6 +40,22 @@ export class AuthService {
       method: 'POST',
       credentials: 'include',
       // credentials: 'same-origin',
+      headers: {
+        Accept: '*/*'
+      },
+      body: formData
+    });
+    await this.updateIsAuthStatus();
+  }
+
+  async signUpWithUsernameEmailAndPassword(username: string, email: string, password: string): Promise<void> {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('email', email);
+    formData.append('password', password);
+    await fetch(this.authApiBaseUrl + 'register', {
+      method: 'POST',
+      credentials: 'include',
       headers: {
         Accept: '*/*'
       },
