@@ -5,13 +5,15 @@ import com.nikhilcodes.curiousbackend.model.QNAModel;
 import com.nikhilcodes.curiousbackend.service.QNAService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"Content-Type", "Accept", "X-Requested-With", "remember-me"}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"Content-Type", "Access-Control-Allow-Origin", "Accept", "X-Requested-With", "remember-me"}, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/qna")
 public class QNAController {

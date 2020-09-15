@@ -13,6 +13,7 @@ import { CreateAnswerComponent } from './qnapage/create-answer/create-answer.com
 import {FormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
 import { NewQNAFormComponent } from './new-qnaform/new-qnaform.component';
+import { PseudoMdEditorComponent } from './widgets/pseudo-md-editor/pseudo-md-editor.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NewQNAFormComponent } from './new-qnaform/new-qnaform.component';
     FooterComponent,
     CreateAnswerComponent,
     NewQNAFormComponent,
+    PseudoMdEditorComponent,
   ],
   imports: [
     BrowserModule,

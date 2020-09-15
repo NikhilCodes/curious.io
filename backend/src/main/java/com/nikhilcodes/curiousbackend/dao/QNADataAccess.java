@@ -3,6 +3,7 @@ package com.nikhilcodes.curiousbackend.dao;
 import com.nikhilcodes.curiousbackend.model.AnswerModel;
 import com.nikhilcodes.curiousbackend.model.QNAModel;
 import com.nikhilcodes.curiousbackend.model.UserModel;
+import com.nikhilcodes.curiousbackend.utils.RandomIdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -85,7 +86,7 @@ public class QNADataAccess implements QNADao {
     @Override
     public void addAnswerToQuestionById(AnswerModel answer, int id, String email) {
         int user_id = Optional.ofNullable(jdbcTemplate.queryForObject("SELECT id FROM users_db WHERE email=?", new Object[]{email}, ((resultSet, i) -> resultSet.getInt("id")))).get();
-        jdbcTemplate.update("INSERT INTO answers_db (id, answer, question_id, votes, added_on, added_by) VALUES (?, ?, ?, ?, ?, ?)", id, answer.getAnswer(), id, 0, new Date(Calendar.getInstance().getTimeInMillis()), user_id);
+        jdbcTemplate.update("INSERT INTO answers_db (id, answer, question_id, votes, added_on, added_by) VALUES (?, ?, ?, ?, ?, ?)", RandomIdGenerator.generate(), answer.getAnswer(), id, 0, new Date(Calendar.getInstance().getTimeInMillis()), user_id);
     }
 
     @Override

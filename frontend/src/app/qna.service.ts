@@ -31,6 +31,7 @@ export class QNAService {
   async addAnswerToQuestionById(id: number, answer: string): Promise<void> {
     await fetch(this.qnaApiBaseUrl + `${id}`, {
       method: 'PUT',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -38,6 +39,6 @@ export class QNAService {
       body: JSON.stringify({
         answer: `${answer}`
       })
-    });
+    }).catch(reason => console.log(reason));
   }
 }

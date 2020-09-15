@@ -46,7 +46,7 @@ public class AuthService extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .antMatcher("/api/**")
                 .authorizeRequests()
-                .requestMatchers(CorsUtils::isPreFlightRequest)
+                .anyRequest()
                 .authenticated();
 
     }

@@ -1,0 +1,12 @@
+<div>
+  <div class="create-answer-options-body row">
+    <div>
+      <strong (click)="createBoldText()" style="cursor: pointer;">B</strong>&nbsp;
+      <i (click)="createItalicText()" style="font-family: 'Source Code Pro',sans-serif">I</i>
+    </div>
+  </div>
+  <div class="row">
+    <textarea [(ngModel)]="editorTextMd" (input)="convertMdToHtml()" class="col" id="body-editor"></textarea>
+    <div [innerHTML]="editorText" class="answer-body-preview col"></div>
+  </div>
+</div>
