@@ -21,4 +21,8 @@ export class HomeComponent {
       this.homeQNAsData = data;
     });
   }
+
+  async onClickAskQuestion(): Promise<void> {
+    await this.router.navigate(['/ask']);
+  }
 }

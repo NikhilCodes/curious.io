@@ -1,0 +1,8 @@
+#root {
+  font-family: Quicksand, sans-serif;
+}
+
+.new-qna-form {
+  background-color: rgba(169, 169, 169, 0.14);
+  border-radius: 10px;
+}

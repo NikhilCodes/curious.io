@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { CreateAnswerComponent } from './qnapage/create-answer/create-answer.component';
 import {FormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
+import { NewQNAFormComponent } from './new-qnaform/new-qnaform.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {LoginComponent} from './login/login.component';
     AnswerCellComponent,
     FooterComponent,
     CreateAnswerComponent,
+    NewQNAFormComponent,
   ],
   imports: [
     BrowserModule,
