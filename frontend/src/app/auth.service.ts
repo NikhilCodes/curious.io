@@ -26,7 +26,6 @@ export class AuthService {
       },
     }).then(r => {
       r.json().then(res => {
-        console.log(res);
         this.isAuthenticatedSubject.next(res);
       });
     });

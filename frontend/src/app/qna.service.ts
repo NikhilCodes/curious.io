@@ -28,6 +28,21 @@ export class QNAService {
     })).json());
   }
 
+  async addQuestion(title, body): Promise<void> {
+    await fetch(this.qnaApiBaseUrl, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+        question: title,
+        body,
+      })
+    }).then(_ => window.location.href = '/');
+  }
+
   async addAnswerToQuestionById(id: number, answer: string): Promise<void> {
     await fetch(this.qnaApiBaseUrl + `${id}`, {
       method: 'PUT',

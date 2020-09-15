@@ -1,6 +1,6 @@
 <div class="container" *ngIf="qnaObj!=undefined">
   <br>
-  <button class="ask-button">Ask Question</button>
+  <button class="ask-button" (click)="navigateToAskPage()">Ask Question</button>
   <h2>
     {{qnaObj.question}}
   </h2>
@@ -8,9 +8,7 @@
     Asked On: {{qnaObj["addedOn"]}}
   </div>
   <hr>
-  <p>
-    {{qnaObj.body}}
-  </p>
+  <p [innerHTML]="qnaObj.body"></p>
   <hr>
 
   <h4>{{qnaObj["answers"].length}} Answer{{qnaObj["answers"].length>1?'s':''}}</h4>

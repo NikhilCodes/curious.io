@@ -15,4 +15,8 @@ export class QNAPageComponent {
       this.qnaObj = data;
     });
   }
+
+  navigateToAskPage(): void {
+    window.location.href = '/ask';
+  }
 }

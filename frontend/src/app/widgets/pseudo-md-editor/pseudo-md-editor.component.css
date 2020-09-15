@@ -22,30 +22,9 @@
   display: inline-block;
   top: 0;
   overflow-y: scroll;
+  background-color: white;
 }
 
 textarea:focus {
   outline: coral 3px solid;
-}
-
-.add-answer-button {
-  background-color: #3f97dc;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  transition-duration: 0.3s;
-}
-
-.add-answer-button:hover {
-  background-color: #2e8fd9;
-}
-
-.add-answer-button:active {
-  background-color: #2e6dd9;
-}
-
-.add-answer-button:disabled {
-  background-color: darkgrey;
 }

@@ -8,7 +8,8 @@
     </div>
     <div class="col-10">
       <a href="question/{{qnaObject.id}}">{{qnaObject.question}}</a>
-      <p>{{qnaObject.body.length > 150?qnaObject.body.substring(0,135) + " ...":qnaObject.body}}</p>
+      <p
+        [innerHTML]="subTitle"></p>
     </div>
   </div>
 </div>

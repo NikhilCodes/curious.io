@@ -6,3 +6,25 @@
   background-color: rgba(169, 169, 169, 0.14);
   border-radius: 10px;
 }
+
+button {
+  background-color: #3f97dc;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  transition-duration: 0.3s;
+}
+
+button:hover {
+  background-color: #2e8fd9;
+}
+
+button:active {
+  background-color: #2e6dd9;
+}
+
+button:disabled {
+  background-color: darkgrey;
+}

@@ -18,7 +18,6 @@ export class CreateAnswerComponent {
     // Services
     this.addAnswerToQuestionById = (id, answer) => {
       this.newAnswerButtonDisabled = true;
-      console.log(id, answer);
       service.addAnswerToQuestionById(id, answer).then(r => window.location.reload());
     };
     //
