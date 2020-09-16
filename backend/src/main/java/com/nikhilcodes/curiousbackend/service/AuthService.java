@@ -14,7 +14,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.cors.CorsUtils;
 
 import javax.sql.DataSource;
 
@@ -42,13 +41,17 @@ public class AuthService extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
         http.csrf().disable()
                 .cors().and()
                 .antMatcher("/api/**")
                 .authorizeRequests()
                 .anyRequest()
-                .authenticated();
-
+                .authenticated()
+                .and()
+                .sessionManagement()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(false);
     }
 
     public PasswordEncoder passwordEncoder() {
