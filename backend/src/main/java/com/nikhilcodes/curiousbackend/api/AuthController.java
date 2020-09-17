@@ -1,7 +1,9 @@
 package com.nikhilcodes.curiousbackend.api;
 
+import com.nikhilcodes.curiousbackend.model.UserModel;
 import com.nikhilcodes.curiousbackend.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", allowCredentials = "true")
 @RestController
@@ -29,7 +32,7 @@ public class AuthController {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         SecurityContext securityContext = authService.createUser(username, email, password);
-        if(securityContext != null) {
+        if (securityContext != null) {
             HttpSession session = request.getSession(true);
             session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
         }
@@ -41,7 +44,7 @@ public class AuthController {
         String password = request.getParameter("password");
         SecurityContext securityContext = authService.loginWithEmailAndPassword(email, password);
         HttpSession session = request.getSession(true);
-        if(securityContext != null) {
+        if (securityContext != null) {
             session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
         } else {
             session.invalidate();
@@ -61,7 +64,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping(path="/authenticated")
+    @PostMapping(path = "/authenticated")
     public boolean isAuthenticated(HttpServletRequest request) {
         return request.isRequestedSessionIdValid();
     }

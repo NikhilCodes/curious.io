@@ -1,6 +1,7 @@
 package com.nikhilcodes.curiousbackend.service;
 
 import com.nikhilcodes.curiousbackend.dao.AuthDao;
+import com.nikhilcodes.curiousbackend.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
+import java.util.Optional;
 
 @Configuration
 @EnableWebSecurity
@@ -75,5 +77,9 @@ public class AuthService extends WebSecurityConfigurerAdapter {
         String passwordHashed = passwordEncoder().encode(passwordPlain);
         authDao.createUser(username, email, passwordHashed);
         return loginWithEmailAndPassword(email, passwordPlain);
+    }
+
+    public Optional<UserModel> getUserByEmail(String email) {
+        return authDao.getUserByEmail(email);
     }
 }
