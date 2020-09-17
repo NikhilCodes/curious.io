@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", allowCredentials = "true")
 @RestController
@@ -23,7 +24,7 @@ public class AuthController {
     }
 
     @PostMapping(path = "/register")
-    public void register(HttpServletRequest request, HttpServletResponse response) {
+    public void register(HttpServletRequest request) {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -35,18 +36,20 @@ public class AuthController {
     }
 
     @PostMapping(path = "/login")
-    public void login(HttpServletRequest request, HttpServletResponse response) {
+    public void login(HttpServletRequest request) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         SecurityContext securityContext = authService.loginWithEmailAndPassword(email, password);
+        HttpSession session = request.getSession(true);
         if(securityContext != null) {
-            HttpSession session = request.getSession(true);
             session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+        } else {
+            session.invalidate();
         }
     }
 
     @GetMapping(path = "/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response) {
+    public void logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         SecurityContextHolder.clearContext();
         if (session != null) {
@@ -58,7 +61,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("authenticated")
+    @PostMapping(path="/authenticated")
     public boolean isAuthenticated(HttpServletRequest request) {
         return request.isRequestedSessionIdValid();
     }
