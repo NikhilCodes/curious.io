@@ -18,6 +18,9 @@ export class HomeComponent {
       }
     });
     service.getQNAs().then(data => {
+      if ((data as Map<string, any>)[`status`] === 403) {
+        auth.logOutUser().then();
+      }
       this.homeQNAsData = data;
     });
   }

@@ -62,4 +62,14 @@ export class AuthService {
     });
     await this.updateIsAuthStatus();
   }
+
+  async logOutUser(): Promise<void> {
+    await fetch(this.authApiBaseUrl + 'logout', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Accept: '*/*'
+      },
+    });
+  }
 }
