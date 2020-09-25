@@ -43,7 +43,6 @@ public class AuthService extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
         http.csrf().disable()
                 .cors().and()
                 .antMatcher("/api/**")
