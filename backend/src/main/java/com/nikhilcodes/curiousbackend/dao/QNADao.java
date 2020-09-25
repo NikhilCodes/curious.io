@@ -25,5 +25,5 @@ public interface QNADao {
 
     void addAnswerToQuestionById(AnswerModel answer, int id, String email);
 
-    UserModel getUserById(int id);
+    void toggleVote(int id, String email);
 }

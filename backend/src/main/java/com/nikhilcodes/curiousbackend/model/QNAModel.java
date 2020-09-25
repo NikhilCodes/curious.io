@@ -2,6 +2,7 @@ package com.nikhilcodes.curiousbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.sql.Array;
 import java.sql.Date;
 import java.util.*;
 
@@ -11,7 +12,7 @@ public class QNAModel {
     final private String body;
     final private int id;
     final private List<AnswerModel> answers;
-    final private int votes;
+    final private List<Integer> votes;
     final private Date addedOn;
     final private UserModel addedBy;
 
@@ -19,7 +20,7 @@ public class QNAModel {
                     @JsonProperty("body") String body,
                     @JsonProperty("id") int id,
                     @JsonProperty("answers") List<AnswerModel> answers,
-                    @JsonProperty("votes") int votes,
+                    @JsonProperty("votes") List<Integer> votes,
                     @JsonProperty("addedOn") Date addedOn,
                     @JsonProperty("addedBy") UserModel addedBy) {
         this.body = body;
@@ -52,7 +53,7 @@ public class QNAModel {
 //        return answers.stream().max(Comparator.comparingInt(AnswerModel::getVotes));
 //    }
 
-    public int getVotes() {
+    public List<Integer> getVotes() {
         return votes;
     }
 

@@ -13,7 +13,7 @@ CREATE TABLE questions_db
     id       INT PRIMARY KEY,
     question VARCHAR(100),
     body     VARCHAR(2000),
-    votes    INT,
+    votes    INT ARRAY,
     added_on DATE,
     added_by INT
 );
