@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="row">
-    <textarea [(ngModel)]="editorTextMd" (input)="convertMdToHtml()" class="col" id="body-editor"></textarea>
+    <textarea [(ngModel)="editorTextMd" (input)="convertMdToHtml()" class="col" id="body-editor"></textarea>
     <div [innerHTML]="editorText" class="answer-body-preview col"></div>
   </div>
 </div>
