@@ -93,8 +93,8 @@ public class QNADataAccess implements QNADao {
     public UserModel getUserById(int id) {
         return jdbcTemplate.queryForObject("SELECT username, email, role FROM users_db WHERE id=?", new Object[]{id}, (resultSet, i) -> new UserModel(
                 id,
-                resultSet.getString("username"),
                 resultSet.getString("email"),
+                resultSet.getString("username"),
                 resultSet.getString("role")
         ));
     }
