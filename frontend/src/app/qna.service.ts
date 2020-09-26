@@ -66,4 +66,14 @@ export class QNAService {
       }
     })).json();
   }
+
+  async voteAnswer(qId: number, aId: number, action: string): Promise<number[]> {
+    return await (await fetch(this.qnaApiBaseUrl + `${qId}/${aId}/${action}`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })).json();
+  }
 }

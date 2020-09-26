@@ -25,4 +25,8 @@ public interface QNADao {
     void addAnswerToQuestionById(AnswerModel answer, int id, String email);
 
     List<Integer> toggleVote(int id, String email);
+
+    List<Integer> upVoteAnswer(int q_id, int a_id, String email);
+
+    List<Integer> downVoteAnswer(int q_id, int a_id, String email);
 }

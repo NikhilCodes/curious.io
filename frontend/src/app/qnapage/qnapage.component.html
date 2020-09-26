@@ -25,7 +25,7 @@
   <h4>{{qnaObj["answers"].length}} Answer{{qnaObj["answers"].length>1?'s':''}}</h4>
   <br>
   <div *ngFor="let answerObj of qnaObj['answers']">
-    <app-answer-cell [answerObj]="answerObj"></app-answer-cell>
+    <app-answer-cell [answerObj]="answerObj" [qnaObj]="qnaObj"></app-answer-cell>
   </div>
 
   <h4>Your Answer</h4>

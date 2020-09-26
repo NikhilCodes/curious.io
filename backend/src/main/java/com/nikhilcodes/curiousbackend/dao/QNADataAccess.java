@@ -36,12 +36,13 @@ public class QNADataAccess implements QNADao {
                     body,
                     q_id,
                     jdbcTemplate.query(
-                            "SELECT id, answer, votes, added_on, added_by FROM answers_db WHERE question_id = ? ORDER BY added_on DESC",
+                            "SELECT id, answer, up_votes, down_votes, added_on, added_by FROM answers_db WHERE question_id = ? ORDER BY added_on DESC",
                             new Object[]{q_id},
                             (answerSet, i_) -> new AnswerModel(
                                     answerSet.getString("answer"),
                                     answerSet.getInt("id"),
-                                    answerSet.getInt("votes"),
+                                    Arrays.asList((Integer[]) answerSet.getArray("up_votes").getArray()),
+                                    Arrays.asList((Integer[]) answerSet.getArray("down_votes").getArray()),
                                     answerSet.getDate("added_on"),
                                     getUserById(answerSet.getInt("added_by"))
                             )
@@ -56,7 +57,7 @@ public class QNADataAccess implements QNADao {
     public void addQuestion(QNAModel question, int id, String email) {
         int user_id = Optional.ofNullable(jdbcTemplate.queryForObject("SELECT id FROM users_db WHERE email=?", new Object[]{email}, ((resultSet, i) -> resultSet.getInt("id")))).get();
         jdbcTemplate.update("INSERT INTO questions_db (id, question, body, votes, added_on, added_by) VALUES (?, ?, ?, ?, ?, ?)", id, question.getQuestion(), question.getBody(),
-                new Integer[]{5435, 35435}, new Date(Calendar.getInstance().getTimeInMillis()), user_id);
+                new int[]{}, new Date(Calendar.getInstance().getTimeInMillis()), user_id);
     }
 
     @Override
@@ -68,12 +69,13 @@ public class QNADataAccess implements QNADao {
                         resultSet.getString("body"),
                         id,
                         jdbcTemplate.query(
-                                "SELECT id, answer, votes, added_on, added_by FROM answers_db WHERE question_id = ? ORDER BY votes DESC",
+                                "SELECT id, answer, up_votes, down_votes, added_on, added_by FROM answers_db WHERE question_id = ? ORDER BY up_votes DESC",
                                 new Object[]{id},
                                 (answerSet, i1) -> new AnswerModel(
                                         answerSet.getString("answer"),
                                         answerSet.getInt("id"),
-                                        answerSet.getInt("votes"),
+                                        Arrays.asList((Integer[]) answerSet.getArray("up_votes").getArray()),
+                                        Arrays.asList((Integer[]) answerSet.getArray("down_votes").getArray()),
                                         answerSet.getDate("added_on"),
                                         getUserById(answerSet.getInt("added_by"))
                                 )
@@ -88,23 +90,56 @@ public class QNADataAccess implements QNADao {
     @Override
     public void addAnswerToQuestionById(AnswerModel answer, int id, String email) {
         int user_id = Optional.ofNullable(jdbcTemplate.queryForObject("SELECT id FROM users_db WHERE email=?", new Object[]{email}, ((resultSet, i) -> resultSet.getInt("id")))).get();
-        jdbcTemplate.update("INSERT INTO answers_db (id, answer, question_id, votes, added_on, added_by) VALUES (?, ?, ?, ?, ?, ?)", RandomIdGenerator.generate(), answer.getAnswer(), id, 0, new Date(Calendar.getInstance().getTimeInMillis()), user_id);
+        jdbcTemplate.update("INSERT INTO answers_db (id, answer, question_id, up_votes, down_votes, added_on, added_by) VALUES (?, ?, ?, ?, ?, ?, ?)", RandomIdGenerator.generate(), answer.getAnswer(), id, new int[]{}, new int[]{}, new Date(Calendar.getInstance().getTimeInMillis()), user_id);
     }
 
     @Override
     public List<Integer> toggleVote(int id, String email) {
-        Integer uid = jdbcTemplate.queryForObject("SELECT id FROM users_db WHERE email=?", new Object[]{email},
-                (resultSet, i) -> resultSet.getInt("id"));
+        Integer uid = getUidFromUserEmail(email);
         List<Integer> votesCast = new ArrayList<>(Objects.requireNonNull(jdbcTemplate.queryForObject("SELECT votes FROM questions_db", (resultSet, i) -> Arrays.asList((Integer[]) resultSet.getArray("votes").getArray()))));
 
         if (votesCast.contains(uid)) {
             // If vote casted: removing vote
             votesCast.remove(uid);
             jdbcTemplate.update("UPDATE questions_db SET votes=ARRAY_REMOVE(votes, ?)", uid);
-        } else if (uid != null) {
+        } else {
             // If no vote casted by user: then cast one
             votesCast.add(uid);
             jdbcTemplate.update("UPDATE questions_db SET votes=?", createSqlIntArray(votesCast));
+        }
+        return votesCast;
+    }
+
+    @Override
+    public List<Integer> upVoteAnswer(int q_id, int a_id, String email) {
+        Integer uid = getUidFromUserEmail(email);
+        List<Integer> votesCast = new ArrayList<>(Objects.requireNonNull(jdbcTemplate.queryForObject("SELECT up_votes FROM answers_db", (resultSet, i) -> Arrays.asList((Integer[]) resultSet.getArray("up_votes").getArray()))));
+        if (votesCast.contains(uid)) {
+            // If vote casted: removing vote
+            votesCast.remove(uid);
+            jdbcTemplate.update("UPDATE answers_db SET up_votes=ARRAY_REMOVE(up_votes, ?)", uid);
+        } else {
+            // If no vote casted by user: then cast one
+            votesCast.add(uid);
+            jdbcTemplate.update("UPDATE answers_db SET down_votes=ARRAY_REMOVE(down_votes, ?)", uid);
+            jdbcTemplate.update("UPDATE answers_db SET up_votes=?", createSqlIntArray(votesCast));
+        }
+        return votesCast;
+    }
+
+    @Override
+    public List<Integer> downVoteAnswer(int q_id, int a_id, String email) {
+        Integer uid = getUidFromUserEmail(email);
+        List<Integer> votesCast = new ArrayList<>(Objects.requireNonNull(jdbcTemplate.queryForObject("SELECT down_votes FROM answers_db", (resultSet, i) -> Arrays.asList((Integer[]) resultSet.getArray("down_votes").getArray()))));
+        if (votesCast.contains(uid)) {
+            // If vote casted: removing vote
+            votesCast.remove(uid);
+            jdbcTemplate.update("UPDATE answers_db SET down_votes=ARRAY_REMOVE(down_votes, ?)", uid);
+        } else {
+            // If no vote casted by user: then cast one
+            votesCast.add(uid);
+            jdbcTemplate.update("UPDATE answers_db SET up_votes=ARRAY_REMOVE(up_votes, ?)", uid);
+            jdbcTemplate.update("UPDATE answers_db SET down_votes=?", createSqlIntArray(votesCast));
         }
         return votesCast;
     }
@@ -117,6 +152,10 @@ public class QNADataAccess implements QNADao {
                 resultSet.getString("username"),
                 resultSet.getString("role")
         ));
+    }
+
+    private int getUidFromUserEmail(String email) {
+        return jdbcTemplate.queryForObject("SELECT id FROM users_db WHERE email=?", new Object[]{email}, (resultSet, i) -> resultSet.getInt("id"));
     }
 
     private java.sql.Array createSqlIntArray(List<Integer> list) {

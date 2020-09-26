@@ -5,24 +5,30 @@ import com.nikhilcodes.curiousbackend.dao.AuthDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
+import java.util.List;
 
 public class AnswerModel {
     final private String answer;
-    final private int votes;
+    final private List<Integer> upVotes, downVotes;
     final private int id;
     final private Date addedOn;
     final private UserModel addedBy;
 
-    public AnswerModel(@JsonProperty("answer") String answer, @JsonProperty("id") int id, int votes, Date addedOn, UserModel addedBy) {
+    public AnswerModel(@JsonProperty("answer") String answer, @JsonProperty("id") int id, List<Integer> upVotes, List<Integer> downVotes, Date addedOn, UserModel addedBy) {
         this.answer = answer;
         this.id = id;
-        this.votes = votes;
+        this.upVotes = upVotes;
+        this.downVotes = downVotes;
         this.addedOn = addedOn;
         this.addedBy = addedBy;
     }
 
-    public int getVotes() {
-        return votes;
+    public List<Integer> getUpVotes() {
+        return upVotes;
+    }
+
+    public List<Integer> getDownVotes() {
+        return downVotes;
     }
 
     public String getAnswer() {

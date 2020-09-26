@@ -38,4 +38,12 @@ public class QNAService {
     public List<Integer> toggleVote(int id, String email) {
         return qnaDao.toggleVote(id, email);
     }
+
+    public List<Integer> upVoteAnswer(int q_id, int a_id, String email) {
+        return qnaDao.upVoteAnswer(q_id, a_id, email);
+    }
+
+    public List<Integer> downVoteAnswer(int q_id, int a_id, String email) {
+        return qnaDao.downVoteAnswer(q_id, a_id, email);
+    }
 }

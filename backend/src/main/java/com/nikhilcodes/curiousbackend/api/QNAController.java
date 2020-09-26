@@ -51,4 +51,14 @@ public class QNAController {
     public List<Integer> toggleVote(@CurrentSecurityContext(expression = "authentication.name") String email, @PathVariable("id") int id) {
         return qnaService.toggleVote(id, email);
     }
+
+    @PutMapping(path = "/{q_id}/{a_id}/upvote")
+    public List<Integer> upVoteAnswer(@CurrentSecurityContext(expression = "authentication.name") String email, @PathVariable("q_id") int q_id, @PathVariable("a_id") int a_id) {
+        return qnaService.upVoteAnswer(q_id, a_id, email);
+    }
+
+    @PutMapping(path = "/{q_id}/{a_id}/downvote")
+    public List<Integer> downVoteAnswer(@CurrentSecurityContext(expression = "authentication.name") String email, @PathVariable("q_id") int q_id, @PathVariable("a_id") int a_id) {
+        return qnaService.downVoteAnswer(q_id, a_id, email);
+    }
 }

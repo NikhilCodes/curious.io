@@ -23,7 +23,8 @@ CREATE TABLE answers_db
     id          INT PRIMARY KEY,
     answer      VARCHAR(2000),
     question_id INT REFERENCES questions_db (id),
-    votes       INT,
+    up_votes    INT ARRAY,
+    down_votes  INT ARRAY,
     added_on    DATE,
     added_by    INT
 );
