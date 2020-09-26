@@ -56,4 +56,14 @@ export class QNAService {
       })
     }).catch(reason => console.log(reason));
   }
+
+  async toggleUpvote(id: number): Promise<number[]> {
+    return await (await fetch(this.qnaApiBaseUrl + `${id}/vote`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })).json();
+  }
 }

@@ -2,7 +2,6 @@ package com.nikhilcodes.curiousbackend.dao;
 
 import com.nikhilcodes.curiousbackend.model.AnswerModel;
 import com.nikhilcodes.curiousbackend.model.QNAModel;
-import com.nikhilcodes.curiousbackend.model.UserModel;
 import com.nikhilcodes.curiousbackend.utils.RandomIdGenerator;
 
 import java.util.List;
@@ -25,5 +24,5 @@ public interface QNADao {
 
     void addAnswerToQuestionById(AnswerModel answer, int id, String email);
 
-    void toggleVote(int id, String email);
+    List<Integer> toggleVote(int id, String email);
 }

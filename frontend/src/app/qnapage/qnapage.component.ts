@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {QNAService} from '../qna.service';
 import {ActivatedRoute} from '@angular/router';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-qnapage',
@@ -9,11 +10,21 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class QNAPageComponent {
   qnaObj: object;
+  hasCastedVote: boolean;
+  toggleUpvote: () => void;
 
-  constructor(service: QNAService, private route: ActivatedRoute) {
-    service.getQNAById(parseInt(this.route.snapshot.paramMap.get('id'), 10)).then(data => {
+  constructor(qnaService: QNAService, userService: UserService, private route: ActivatedRoute) {
+    qnaService.getQNAById(parseInt(this.route.snapshot.paramMap.get('id'), 10)).then(data => {
       this.qnaObj = data;
+      this.hasCastedVote = (this.qnaObj[`votes`] as number[]).includes(userService.getUserId());
     });
+
+    this.toggleUpvote = () => {
+      qnaService.toggleUpvote(this.qnaObj[`id`]).then(res => {
+        this.qnaObj[`votes`] = res;
+        this.hasCastedVote = (res as number[]).includes(userService.getUserId());
+      });
+    };
   }
 
   navigateToAskPage(): void {

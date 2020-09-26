@@ -1,7 +1,7 @@
 package com.nikhilcodes.curiousbackend.model;
 
 public class UserModel {
-    final private  int id;
+    final private int id;
     final private String email;
     final private String username;
     final private String role;

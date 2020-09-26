@@ -35,7 +35,7 @@ public class QNAService {
         qnaDao.addAnswerToQuestionById(answer, id, email);
     }
 
-    public void toggleVote(int id, String email) {
-        qnaDao.toggleVote(id, email);
+    public List<Integer> toggleVote(int id, String email) {
+        return qnaDao.toggleVote(id, email);
     }
 }

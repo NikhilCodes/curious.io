@@ -48,7 +48,7 @@ public class QNAController {
     }
 
     @PutMapping(path = "/{id}/vote")
-    public void toggleVote(@CurrentSecurityContext(expression = "authentication.name") String email, @PathVariable("id") int id) {
-        qnaService.toggleVote(id, email);
+    public List<Integer> toggleVote(@CurrentSecurityContext(expression = "authentication.name") String email, @PathVariable("id") int id) {
+        return qnaService.toggleVote(id, email);
     }
 }

@@ -13,6 +13,11 @@
     <div class="float-right pl-3 pr-3 pt-2 pb-2 rounded-pill" style="background-color: #4b3f9121;">
       Asked by <strong>{{qnaObj["addedBy"]["username"]}}</strong>
     </div>
+    <button class="float-left mr-3 pl-2 pr-3 pt-2 pb-2 border-0 rounded-pill" style="background-color: #4ba6ee;color: white;outline: none"
+    (click)="toggleUpvote()">
+      <span class="rounded-pill bg-white p-1 pl-3 pr-3 text-monospace text-primary font-weight-bold">{{qnaObj["votes"].length}}</span>
+      Upvote{{hasCastedVote?'d':''}}
+    </button>
     <br><br>
   </div>
   <hr>
