@@ -113,16 +113,16 @@ public class QNADataAccess implements QNADao {
     @Override
     public List<Integer> upVoteAnswer(int q_id, int a_id, String email) {
         Integer uid = getUidFromUserEmail(email);
-        List<Integer> votesCast = new ArrayList<>(Objects.requireNonNull(jdbcTemplate.queryForObject("SELECT up_votes FROM answers_db", (resultSet, i) -> Arrays.asList((Integer[]) resultSet.getArray("up_votes").getArray()))));
+        List<Integer> votesCast = new ArrayList<>(Objects.requireNonNull(jdbcTemplate.queryForObject("SELECT up_votes FROM answers_db WHERE id = ?", new Object[]{a_id}, (resultSet, i) -> Arrays.asList((Integer[]) resultSet.getArray("up_votes").getArray()))));
         if (votesCast.contains(uid)) {
             // If vote casted: removing vote
             votesCast.remove(uid);
-            jdbcTemplate.update("UPDATE answers_db SET up_votes=ARRAY_REMOVE(up_votes, ?)", uid);
+            jdbcTemplate.update("UPDATE answers_db SET up_votes=ARRAY_REMOVE(up_votes, ?) WHERE id = ?", uid, a_id);
         } else {
             // If no vote casted by user: then cast one
             votesCast.add(uid);
-            jdbcTemplate.update("UPDATE answers_db SET down_votes=ARRAY_REMOVE(down_votes, ?)", uid);
-            jdbcTemplate.update("UPDATE answers_db SET up_votes=?", createSqlIntArray(votesCast));
+            jdbcTemplate.update("UPDATE answers_db SET down_votes=ARRAY_REMOVE(down_votes, ?) WHERE id = ?", uid, a_id);
+            jdbcTemplate.update("UPDATE answers_db SET up_votes=? WHERE id = ?", createSqlIntArray(votesCast), a_id);
         }
         return votesCast;
     }
@@ -130,16 +130,16 @@ public class QNADataAccess implements QNADao {
     @Override
     public List<Integer> downVoteAnswer(int q_id, int a_id, String email) {
         Integer uid = getUidFromUserEmail(email);
-        List<Integer> votesCast = new ArrayList<>(Objects.requireNonNull(jdbcTemplate.queryForObject("SELECT down_votes FROM answers_db", (resultSet, i) -> Arrays.asList((Integer[]) resultSet.getArray("down_votes").getArray()))));
+        List<Integer> votesCast = new ArrayList<>(Objects.requireNonNull(jdbcTemplate.queryForObject("SELECT down_votes FROM answers_db WHERE id = ?", new Object[]{a_id}, (resultSet, i) -> Arrays.asList((Integer[]) resultSet.getArray("down_votes").getArray()))));
         if (votesCast.contains(uid)) {
             // If vote casted: removing vote
             votesCast.remove(uid);
-            jdbcTemplate.update("UPDATE answers_db SET down_votes=ARRAY_REMOVE(down_votes, ?)", uid);
+            jdbcTemplate.update("UPDATE answers_db SET down_votes = ARRAY_REMOVE(down_votes, ?) WHERE id = ?", uid, a_id);
         } else {
             // If no vote casted by user: then cast one
             votesCast.add(uid);
-            jdbcTemplate.update("UPDATE answers_db SET up_votes=ARRAY_REMOVE(up_votes, ?)", uid);
-            jdbcTemplate.update("UPDATE answers_db SET down_votes=?", createSqlIntArray(votesCast));
+            jdbcTemplate.update("UPDATE answers_db SET up_votes = ARRAY_REMOVE(up_votes, ?) WHERE id = ?", uid, a_id);
+            jdbcTemplate.update("UPDATE answers_db SET down_votes = ? WHERE id = ?", createSqlIntArray(votesCast), a_id);
         }
         return votesCast;
     }
