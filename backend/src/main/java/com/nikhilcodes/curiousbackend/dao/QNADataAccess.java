@@ -96,16 +96,16 @@ public class QNADataAccess implements QNADao {
     @Override
     public List<Integer> toggleVote(int id, String email) {
         Integer uid = getUidFromUserEmail(email);
-        List<Integer> votesCast = new ArrayList<>(Objects.requireNonNull(jdbcTemplate.queryForObject("SELECT votes FROM questions_db", (resultSet, i) -> Arrays.asList((Integer[]) resultSet.getArray("votes").getArray()))));
+        List<Integer> votesCast = new ArrayList<>(Objects.requireNonNull(jdbcTemplate.queryForObject("SELECT votes FROM questions_db WHERE id=?", new Object[]{id}, (resultSet, i) -> Arrays.asList((Integer[]) resultSet.getArray("votes").getArray()))));
 
         if (votesCast.contains(uid)) {
             // If vote casted: removing vote
             votesCast.remove(uid);
-            jdbcTemplate.update("UPDATE questions_db SET votes=ARRAY_REMOVE(votes, ?)", uid);
+            jdbcTemplate.update("UPDATE questions_db SET votes=ARRAY_REMOVE(votes, ?) WHERE id=?", uid, id);
         } else {
             // If no vote casted by user: then cast one
             votesCast.add(uid);
-            jdbcTemplate.update("UPDATE questions_db SET votes=?", createSqlIntArray(votesCast));
+            jdbcTemplate.update("UPDATE questions_db SET votes=? WHERE id=?", createSqlIntArray(votesCast), id);
         }
         return votesCast;
     }
